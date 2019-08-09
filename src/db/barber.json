@@ -1,0 +1,71 @@
+{
+    "barberos" : [
+        {
+            "name": "juan manuel",
+            "id":"01"
+        },
+        {
+            "name": "Ricardo",
+            "id":"02"
+        },
+        {
+            "name": "Sebastian",
+            "id":"03"
+        },
+        {
+            "name": "Daniel",
+            "id":"04"
+        },
+        {
+            "name": "Franc",
+            "id":"05"
+        }
+        ,
+        {
+            "name": "Franc",
+            "id":"06"
+        }
+    ],
+    "clientes" : [
+        {
+            "name": "enrique",
+            "id":"01"
+        },
+        {
+            "name": "manuel",
+            "id":"02"
+        }
+    ],
+    
+        "BarberShops" : [
+        {
+            "title": "FrekiStyle",
+            "admin": "Gerente de FrekiStyle",
+            "description": "servicio variosm",
+            "servicios": "Barba con Vapor y Cuchilla    $20000  Retoque Barba con Patillera, Tijera y Perfilado",	         
+            "_id": "01"
+        },
+        {
+            "title": "Peluquera",
+            "admin": "Gerente de Peluquera",
+            "description": "lorem ipsum lorem yo no se que vendo prrro lorem ipsum",
+            "_id": "02",
+            "servicios": "Matizante para Canas, no incluye lavado incluye lavado    $ 20000"
+        },
+        {
+            "title": "style",
+            "admin": "Gerente de Style",
+            "description": "ayuwasodoaskdosakdosaipsum",
+            "_id": "03",
+            "servicios": "Matizante para Canas, no incluye lavado incluye lavado    $ 2230000"
+        },
+        {
+            "title": "NextStyle",
+            "admin": "Juan pp",
+            "description": "nojodam",
+            "_id": "04",
+            "servicios": "Matizante para Canas   $ 2230000"
+        }
+    ]
+
+}
