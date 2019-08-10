@@ -26,7 +26,7 @@ export default class BarberShop extends Component{
                     <p className="card-text text-secondary">
                         {this.state.description}
                     </p>
-                    <Link className="btn btn-outline-dark btn-block"  to={"/createcita/"+this.state._id}>
+                    <Link className="btn btn-outline-success btn-block"  to={"/createcita/"+this.state._id}>
                         ver    
                     </Link>  
                 </div>      

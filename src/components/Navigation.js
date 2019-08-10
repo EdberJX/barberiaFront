@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import IconLogo from "../images/IconLogo1.png"
 
 export default class Navigation extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
        <div className="container">
-        <Link className="navbar-brand" to="/"> BarberTime </Link>
+       <div className="spinner-grow text-light" role="status">
+  <span className="sr-only">Loading...</span>
+</div>
+        <Link className="navbar-brand pl-2" to="/"> 
+        <img src={IconLogo} alt="imagen1" className="card-img-top"></img>
+         </Link>
             <button
             className="navbar-toggler"
             type="button"
@@ -23,18 +29,15 @@ export default class Navigation extends React.Component {
                     <li className="nav-item active">
                     <Link className="nav-link" to="/"> Inicio </Link>
                     </li>
-                    <li className="nav-item">
-                    <Link className="nav-link" to="/barber"> Create barber </Link>
+                    <li className="nav-item ">
+                    <Link className="nav-link" to="/citas"> Citas </Link>
                     </li>
-                  
+                    
                     <li className="nav-item">
-                    <Link className="nav-link" to="/createClient"> Create client </Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link className="nav-link" to="/createBarberShop"> Create BarberShop </Link>
+                    <Link className="nav-link btn btn-outline-dark" to="/signin"> Sign in</Link>
                     </li>
                     <li className="nav-item">
-                    <Link className="nav-link" to="/clients"> Clientes</Link>
+                    <Link className="nav-link btn btn-outline-dark" to="/signup"> Sign up </Link>
                     </li>
                     
                     

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 //import axios from 'axios';
 import { barberos } from '../db/barber.json';
 export default class CreateUser extends Component {
@@ -8,11 +9,15 @@ export default class CreateUser extends Component {
         console.log(this.state)
     }
     getBarbers = async() =>{
-        this.setState({users: barberos})
+        this.setState({
+            users: barberos,
+            idBarberShop: this.props.match.params.id
+        })
     }
     state = {
         users: [],
-        userName: ''
+        userName: '',
+        idBarberShop: ""
     }
 
     /*async componentDidMount(){
@@ -52,18 +57,15 @@ onSubmit =  (e) =>{
     console.log(this.state)
           
 }
-saveBarber = (e) =>{
-   // e.preventDefault(); 
-    alert('hola')
-    console.log(e.target.value)
-}
+
     render(){
         return(
             <div className="container pt-4">
             <div className="row">
                 <div className="col-md-4">
                     <div className=" card card-body">
-                        <h3 className="text-center">Create Barber</h3>
+                        <h3 className="text-center">Registrar Barbero</h3>
+                        <div className="container pt-4">
                         <form onSubmit= {this.onSubmit}>
                             <div className="form-group">
                                 <input
@@ -73,11 +75,21 @@ saveBarber = (e) =>{
                                   //  onChange={this.onChangeUsername}
                                 />
                             </div>
-                            <button type="submit" className="btn btn-primary btn-block " onClick ={()=>this.saveBarber()}> 
-                                Save
+                            <div className="form-group">
+                                <input
+                                    //value={this.state.userName}
+                                    placeholder="correo"
+                                    className="form-control" type="text"
+                                  //  onChange={this.onChangeUsername}
+                                />
+                            </div>
+                            <button type="submit" className="btn btn-primary btn-block " > 
+                                Registrar Barbero
                             </button>
+                            <br></br>
+                            <Link className="nav-link btn btn-lg btn-success btn-block" type="submit" to={"/addservice/"+this.state.idBarberShop}> Añadir servicio</Link>
                         </form>
-                        
+                        </div>
                     </div>
                 </div>
                 <div className="col-md-8">
@@ -100,6 +112,7 @@ saveBarber = (e) =>{
                     </ul>
                 </div>
             </div>
+            
             </div>
         )
     }

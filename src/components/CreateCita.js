@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import { barberos,BarberShops } from "../db/barber.json";
-import DatePicker from "react-datepicker";
+import { BarberShops } from "../db/barber.json";
+import FormCita from "./FormCita"
+
 import "react-datepicker/dist/react-datepicker.css";
+
 
 export default class CreateCita extends Component {
   async componentDidMount() {
     this.getBarber();
-    await this.setState({
-      barberos: barberos,
-      barberoSelected: barberos[1].name
-    });
-    
-  }
+    }
   onSubmit = async e => {
     e.preventDefault();
   };
@@ -27,17 +24,19 @@ export default class CreateCita extends Component {
      _id: barber[0]._id,
      title: barber[0].title,
      description: barber[0].description,
-     servicios: barber[0].servicios
+     servicios: barber[0].servicios,
+     telefono: barber[0].telefono
    })
   }
 
   state = {
     barberos: [],
     barberoSelected: "",
+    telefono:"",
     _id: "",
     title: "",
     description: "",
-    servicios: "",
+    servicios: [],
     date: new Date()
   };
   onInputChange = async e => {
@@ -54,9 +53,54 @@ export default class CreateCita extends Component {
   render() {
     return (
       //<div className="col-md-6 offset-md-3">
-      <div className="container pt-4">
-      <div className="row">
+      <div className="container ">
+      <div className="row mt-4">
         <div className="col-md-4">
+              <FormCita/>
+          </div>
+          
+        <div className="col-md-8">
+            
+        <div className="jumbotron">
+            <div className="card-header ">
+                    <h3 className="display-4">Bienvenidos a {this.state.title}</h3>
+            </div>
+                    
+                        <div className="card-body">
+                          <h5>Servicios:</h5>
+                          <br></br>
+                            <ul>
+                            {this.state.servicios.map(servicios => (
+                             <li key={servicios._id}> <h5>{servicios.nameService}</h5></li>
+                              
+                              ))}
+                            </ul> 
+                        </div>
+                        <hr className="my-4"></hr>
+                    <div className="card-footer">
+                        <h4>Llamanos {this.state.telefono} </h4>
+                    </div>
+                        
+                  </div>  
+            </div>
+        </div>
+      
+     </div>
+     
+    );
+  }
+}
+/*<div className="form-group">
+            <DatePicker 
+                className="form-control" 
+                selected={this.state.date}
+                onChange={this.onChange} 
+            />
+          </div>
+          //las citass normales
+
+
+          <div className="col-md-4">
           <div className="card card-body">
             <h4 className="text-center">Obtener Cita</h4>
             <div className="form-group">
@@ -88,33 +132,15 @@ export default class CreateCita extends Component {
             </form>
           </div>
         </div>
-        <div className="col-md-8">
-            
-                
-            <div className="card-header d-flex justify-content-between">
-                    <h5>{this.state.title}</h5>
+          
+
+        //jumbotron
+
+        <div class="jumbotron">
+                <h1 class="display-4">Hello, world!</h1>
+                <p class="lead">This is a simple hero unit, a simple jumbotron-style .</p>
+            <hr class="my-4"></hr>
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
             </div>
-                    
-                        <div className="card-body">
-                            {this.state.servicios}
-                        </div>
-                      
-                    <div className="card-footer">
-                        {this.state._id}
-                    </div>
-                        
-                    
-            </div>
-        </div>
-      </div>
-     
-    );
-  }
-}
-/*<div className="form-group">
-            <DatePicker 
-                className="form-control" 
-                selected={this.state.date}
-                onChange={this.onChange} 
-            />
-          </div>*/
+          */
