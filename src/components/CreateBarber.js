@@ -1,62 +1,72 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-//import axios from 'axios';
-import { barberos } from '../db/barber.json';
+import axios from 'axios';
+//import { barberos } from '../db/barber.json';
 export default class CreateUser extends Component {
   
     async componentDidMount(){
-      await  this.getBarbers();
-        console.log(this.state)
-    }
-    getBarbers = async() =>{
-        this.setState({
-            users: barberos,
-            idBarberShop: this.props.match.params.id
-        })
-    }
-    state = {
-        users: [],
-        userName: '',
-        idBarberShop: ""
-    }
-
-    /*async componentDidMount(){
-        this.getUsers();
-        console.log(this.state.users.map(user=>user.userName))
-    }
-
-     getUsers = async() =>{
-        const res = await axios.get('http://localhost:5000/api/users');
-        this.setState({users: res.data});
-    }
-    onDelete =  async (id) =>{
-        const res = await axios.delete('http://localhost:5000/api/users/' + id);
-        console.log(res)
-        this.getUsers();
-    }
-    onChangeUsername = (e) =>{
-        this.setState({
-            userName: e.target.value
-        }) 
-    }
-    onSubmit = async (e) =>{
+       // await  this.getIdAdmin();
+       const idAdmin = await axios.get('http://localhost:5000/barberiaid/'+this.props.match.params.id)
+       this.setState({barberia: idAdmin.data[0].admin});
+       await this.getBarberos();
+       console.log(idAdmin.data[0].admin)
+     }
+    
+     onSubmitBarbero = async (e) =>{
         e.preventDefault(); 
-         await axios.post('http://localhost:5000/api/users',{
-            userName: this.state.userName
-        })
-        this.setState({userName:''});
-        this.getUsers();
-       
+        const newBarbero = {
+            nombre: this.state.nombre,
+            apellido: this.state.apellido,
+            email: this.state.email,
+            password: this.state.password,
+            barberia: this.props.match.params.id
+        }
+        const res = await axios.post('http://localhost:5000/addbarbero', newBarbero);
+      
+       this.wipeState();
+       this.getBarberos();
+      
     }
-*/
-onSubmit =  (e) =>{
-    e.preventDefault(); 
-   // console.log(e.target.value);
-   // alert('Barbero creado');
-    //console.log(barberos);
-    console.log(this.state)
-          
-}
+    onDelete =   (id) =>{
+        
+        axios.delete('http://localhost:5000/removebarbero/'+id);
+       this.getBarberos();
+     
+        
+    }
+   
+    
+    wipeState = ()=>{
+        this.setState({
+            nombre: "",
+            email: "",
+            password: "",
+            apellido: "",
+           
+        })
+    }
+
+    getBarberos = async () =>{
+
+       const res = await axios.get('http://localhost:5000/barberos/'+this.props.match.params.id)
+        this.setState({barberos: res.data })
+        console.log(this.state.barberos)
+    }
+    
+    state = {
+        nombre: "",
+        apellido: "",
+        barberos: [],
+        email: "",
+        password: "",
+        barberia: ""
+    }
+    onInpuntChange = (e) =>{
+        this.setState({      [e.target.name]: e.target.value});
+        
+    } 
+    
+
 
     render(){
         return(
@@ -66,33 +76,86 @@ onSubmit =  (e) =>{
                     <div className=" card card-body">
                         <h3 className="text-center">Registrar Barbero</h3>
                         <div className="container pt-4">
-                        <form onSubmit= {this.onSubmit}>
+                        <form onSubmit= {this.onSubmitBarbero}>
                             <div className="form-group">
                                 <input
-                                    //value={this.state.userName}
+                                    value={this.state.nombre}
                                     placeholder="Nombre del barbero"
                                     className="form-control" type="text"
-                                  //  onChange={this.onChangeUsername}
+                                    onChange={this.onInpuntChange}
+                                    name="nombre"
+                                    required
                                 />
                             </div>
                             <div className="form-group">
                                 <input
-                                    //value={this.state.userName}
-                                    placeholder="correo"
+                                    value={this.state.apellido}
+                                    placeholder="Apellido"
                                     className="form-control" type="text"
-                                  //  onChange={this.onChangeUsername}
+                                    onChange={this.onInpuntChange}
+                                    name="apellido"
+                                    required
                                 />
+                            </div>
+                            <div className="form-group">
+                                <input
+                                    value={this.state.email}
+                                    placeholder="Correo"
+                                    className="form-control" type="text"
+                                    onChange={this.onInpuntChange}
+                                    name="email"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                            <input 
+                                type="password" 
+                                id="inputPassword" 
+                                value={this.state.password}
+                                className="form-control" 
+                                placeholder="Password" 
+                                onChange={this.onInpuntChange}
+                                name="password"
+                                required/>
                             </div>
                             <button type="submit" className="btn btn-primary btn-block " > 
                                 Registrar Barbero
                             </button>
                             <br></br>
-                            <Link className="nav-link btn btn-lg btn-success btn-block" type="submit" to={"/addservice/"+this.state.idBarberShop}> Añadir servicio</Link>
+                            <Link className="nav-link btn btn-lg btn-success btn-block" type="submit" to={"/addservice/"+this.state.barberia}> Añadir servicio</Link>
                         </form>
                         </div>
                     </div>
                 </div>
+                
                 <div className="col-md-8">
+                <ul className="list-group">
+                        {
+                            this.state.barberos.map( barbers =>(
+                                
+                                <li 
+                                className="list-group-item list-group-item-action" 
+                                key={barbers._id}
+                                onDoubleClick={()=>this.onDelete(barbers._id)}
+                                >
+                                   
+                                    {barbers.nombre+" " + barbers.apellido}
+                                </li>    
+                                )
+                            )
+                          
+                        }
+
+                    </ul>
+                    </div>
+            </div>
+            
+            </div>
+        )
+    }
+}
+/*
+<div className="col-md-8">
                     <ul className="list-group">
                         {
                             this.state.users.map( user =>(
@@ -106,14 +169,18 @@ onSubmit =  (e) =>{
                                     {user.userName}
                                 </li>    
                                 )
-                            )*/
+                            )
                         }
+ {
+                            this.state.barberos.map( user =>(
+                                <li className="list-group-item list-group-item-action" key={user.id} >
+                                    {user.name}
+                                </li>    
+                                )
+                            )
+                           
+                        }
+                        </ul>
+                    </div>
 
-                    </ul>
-                </div>
-            </div>
-            
-            </div>
-        )
-    }
-}
+*/
