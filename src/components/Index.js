@@ -7,7 +7,7 @@ export default class Index extends Component{
     async componentDidMount(){
         //console.log(BarberShops);
      await   this.getBarberShop();
-        console.log(this.state);
+        //console.log(this.state);
     }
     getBarberShop = async ()=>{
         this.setState({barberShops: BarberShops})
@@ -20,19 +20,7 @@ export default class Index extends Component{
     }
     render(){
         return(
-          /*  <div className="col-md-8">
-                    <ul className="list-group">
-                        {
-                            this.state.barberShops.map( barberShops =>(
-                                <li className="list-group-item list-group-item-action" key={barberShops.id} >
-                                    {barberShops.name}
-                                </li>    
-                                )
-                            )
-                        }
-
-                    </ul>
-                </div>*/
+         
                 
             <div className = "container pt-4">
                 <div className="collage container pb-4"> 
@@ -42,31 +30,7 @@ export default class Index extends Component{
                     </form>
                     </div>
                     
-               {/* <div className="row">
-                {this.state.barberShops.map(BarberShops =>
-                    <div className="col-md-4 p-2" key={BarberShops._id}>
-                        <div className="card-header d-flex justify-content-between">
-                            <h5>{BarberShops.title}</h5>
-                            
-                         </div>   
-                        <div className="card card-body">
-                            <div className="card-body">
-                                <p>{BarberShops.description}</p>
-                                <p>{BarberShops.admin}</p>
-                               
-                            </div>    
-                        </div>
-                        <div className="card-footer">
-                        <Link className="btn btn-btn btn-outline-dark" to={"/barbershop/id"}>
-                                Ver
-                        </Link>
-                        </div>
-
-                    </div>
-                    
-                    )}
-         
-            </div>*/}
+              
             <BarberShopList/>
                 </div>
 

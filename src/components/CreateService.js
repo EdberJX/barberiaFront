@@ -20,7 +20,7 @@ export default class CreateService extends Component {
          id: res.data[0]._id,
          servicios: res.data[0].servicios
         })
-    console.log(res.data[0].servicios)
+    //console.log(res.data[0].servicios)
     }
  
   onSubmitBarberia = async (e) =>{
@@ -29,10 +29,10 @@ export default class CreateService extends Component {
         servicio: this.state.servicio,
         id: this.state.id
     }
-    const res = await axios.post('http://localhost:5000/addserviciobarberia', newServicio);
+   await axios.post('http://localhost:5000/addserviciobarberia', newServicio);
    //alert(res.data.msj)
    this.getBarberia(); 
-   console.log(res.data)
+   //console.log(res.data)
 }
   state = {
       servicio:"",

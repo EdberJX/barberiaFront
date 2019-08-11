@@ -9,7 +9,7 @@ export default class CreateUser extends Component {
        const idAdmin = await axios.get('http://localhost:5000/barberiaid/'+this.props.match.params.id)
        this.setState({barberia: idAdmin.data[0].admin});
        await this.getBarberos();
-       console.log(idAdmin.data[0].admin)
+      // console.log(idAdmin.data[0].admin)
      }
     
      onSubmitBarbero = async (e) =>{
@@ -21,7 +21,7 @@ export default class CreateUser extends Component {
             password: this.state.password,
             barberia: this.props.match.params.id
         }
-        const res = await axios.post('http://localhost:5000/addbarbero', newBarbero);
+      await axios.post('http://localhost:5000/addbarbero', newBarbero);
       
        this.wipeState();
        this.getBarberos();
@@ -50,7 +50,7 @@ export default class CreateUser extends Component {
 
        const res = await axios.get('http://localhost:5000/barberos/'+this.props.match.params.id)
         this.setState({barberos: res.data })
-        console.log(this.state.barberos)
+       // console.log(this.state.barberos)
     }
     
     state = {

@@ -18,8 +18,8 @@ export default class CreateBarberShop extends Component{
         //this.setState({userName:''});
         //this.getUsers();
         //console.log(res);
-        console.log(newBarberia)
-        console.log(this.state.admin)
+       // console.log(newBarberia)
+        //console.log(this.state.admin)
         this.props.history.push("/addservice/"+this.state.admin)
         }
         onInpuntChange = (e) =>{

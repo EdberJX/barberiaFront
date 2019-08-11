@@ -14,7 +14,7 @@ export default class SignUp extends Component {
         }
        const res  = await axios.post('http://localhost:5000/addadmin',newAdmin)
        
-       console.log(res.data.msj)
+       //console.log(res.data.msj)
        alert(res.data.msj)
        const idAdmin= await this.getAdmin() ;
      this.props.history.push("/createbarbershop/"+ idAdmin.data[0]._id)

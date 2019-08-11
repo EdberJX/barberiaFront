@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import './card.css';
 export default class BarberShop extends Component{
     state = {
-        title: "",
-        description: "",
+        nombre: "",
+        direccion: "",
+        _id:""
     }
     componentDidMount(){
+       // console.log(this.props.nombre)
         this.setState({
-            title: this.props.title,
-            description: this.props.description,
+            nombre: this.props.nombre,
+            direccion: this.props.direccion,
             _id: this.props.id
         })
     }
@@ -22,9 +24,9 @@ export default class BarberShop extends Component{
                     <img src={this.props.imgSrc} alt="imagen1" className="card-img-top"></img>
                 </div>
                 <div className="card-body text-dark">
-                    <h4 className="card-title">{this.state.title}</h4>
+                    <h4 className="card-title">"{this.state.nombre}"</h4>
                     <p className="card-text text-secondary">
-                        {this.state.description}
+                        {this.state.direccion}
                     </p>
                     <Link className="btn btn-outline-success btn-block"  to={"/createcita/"+this.state._id}>
                         ver    

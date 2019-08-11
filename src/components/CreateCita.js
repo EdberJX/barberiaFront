@@ -1,52 +1,43 @@
 import React, { Component } from "react";
-import { BarberShops } from "../db/barber.json";
+//import { BarberShops } from "../db/barber.json";
 import FormCita from "./FormCita"
-
+import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 
 
 export default class CreateCita extends Component {
+
   async componentDidMount() {
-    this.getBarber();
+   
+    this.getBarberos();
+    
     }
-  onSubmit = async e => {
-    e.preventDefault();
-  };
+ 
 
    
    
     //BarberShops._id === this.props.match.params)
    
-  getBarber = async ()=>{
-   
-   const barber = await BarberShops.filter(barber => barber._id === this.props.match.params.id )
-   this.setState({
-     _id: barber[0]._id,
-     title: barber[0].title,
-     description: barber[0].description,
-     servicios: barber[0].servicios,
-     telefono: barber[0].telefono
-   })
-  }
+    getBarberos = async () =>{
+      
+      const res = await axios.get('http://localhost:5000/barberos/'+this.props.match.params.id)
+       this.setState({
+         barberos: res.data,
+         barberia: this.props.match.params.id
+         })
+         //console.log( this.state.barberia);
+      // console.log(this.state.barberos, this.state.barberia )
+   }
 
   state = {
-    barberos: [],
-    barberoSelected: "",
-    telefono:"",
-    _id: "",
-    title: "",
-    description: "",
-    servicios: [],
-    date: new Date()
+    
   };
   onInputChange = async e => {
-    console.log(e.target.name);
-    await this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.barberoSelected);
+   
   };
 
   onChange = date => {
-    this.setState({ date: new Date(date) });
+   
     
   };
 
@@ -54,36 +45,9 @@ export default class CreateCita extends Component {
     return (
       //<div className="col-md-6 offset-md-3">
       <div className="container ">
-      <div className="row mt-4">
         <div className="col-md-4">
-              <FormCita/>
+              <FormCita barberia={this.props.match.params.id}/>
           </div>
-          
-        <div className="col-md-8">
-            
-        <div className="jumbotron">
-            <div className="card-header ">
-                    <h3 className="display-4">Bienvenidos a {this.state.title}</h3>
-            </div>
-                    
-                        <div className="card-body">
-                          <h5>Servicios:</h5>
-                          <br></br>
-                            <ul>
-                            {this.state.servicios.map(servicios => (
-                             <li key={servicios._id}> <h5>{servicios.nameService}</h5></li>
-                              
-                              ))}
-                            </ul> 
-                        </div>
-                        <hr className="my-4"></hr>
-                    <div className="card-footer">
-                        <h4>Llamanos {this.state.telefono} </h4>
-                    </div>
-                        
-                  </div>  
-            </div>
-        </div>
       
      </div>
      
@@ -143,4 +107,40 @@ export default class CreateCita extends Component {
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
             <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
             </div>
-          */
+        
+        
+        
+        
+        
+        <div className="row mt-4">
+        <div className="col-md-4">
+              <FormCita/>
+          </div>
+          
+        <div className="col-md-8">
+            
+        <div className="jumbotron">
+            <div className="card-header ">
+                    <h3 className="display-4">Bienvenidos a {this.state.title}</h3>
+            </div>
+                    
+                        <div className="card-body">
+                          <h5>Servicios:</h5>
+                          <br></br>
+                            <ul>
+                            {this.state.servicios.map(servicios => (
+                             <li key={servicios._id}> <h5>{servicios.nameService}</h5></li>
+                              
+                              ))}
+                            </ul> 
+                        </div>
+                        <hr className="my-4"></hr>
+                    <div className="card-footer">
+                        <h4>Llamanos {this.state.telefono} </h4>
+                    </div>
+                        
+                  </div>  
+            </div>
+        </div>
+        
+            */
