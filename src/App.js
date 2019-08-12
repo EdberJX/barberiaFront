@@ -9,6 +9,7 @@ import CreateBarber from './components/CreateBarber';
 import CreateBarberShop from './components/CreateBarberShop';
 import BarberShop from './components/BarberShop';
 import CreateCita from './components/CreateCita';
+import CitasListbarberos from './components/CitasListbarberos'
 import Index from './components/Index'; 
 
 import './App.css';
@@ -35,6 +36,7 @@ function App() {
        <Route path='/barberShops' component={BarberShopList}/>
        <Route path='/signin' component={SignIn}/>
        <Route path='/signup' component={SignUp}/>
+       <Route path='/citasbarberos/:id' component={CitasListbarberos}/>
 
        
     </Router>

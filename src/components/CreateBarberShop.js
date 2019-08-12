@@ -12,6 +12,7 @@ export default class CreateBarberShop extends Component{
             direccion: this.state.direccion,
             telefono: this.state.telefono,
             admin: this.state.admin
+            
         }
         //5d4f0843565bb52e7ce6f03a
         await axios.post('http://localhost:5000/addbarberia',newBarberia)

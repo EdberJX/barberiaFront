@@ -10,7 +10,8 @@ export default class SignUp extends Component {
             nombre: this.state.nombre,
             apellido: this.state.apellido,
             email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            barberia:true
         }
        const res  = await axios.post('http://localhost:5000/addadmin',newAdmin)
        
@@ -42,7 +43,8 @@ export default class SignUp extends Component {
         nombre: "",
         apellido: "",
         email: "",
-        password: ""
+        password: "",
+        barberia: true
     }
 
     

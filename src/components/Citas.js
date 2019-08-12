@@ -1,30 +1,37 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 
 
 
 export default class Citas extends Component{
     
     componentDidMount(){
+        this.getbarer();
+     console.log(this.props.barbero)
         this.setState({
-            namebarber: this.props.namebarber,
-            cliente: this.props.cliente,
-            id: this.props.id,
+            nombreCliente: this.props.nombreCliente,
+            telefonoCliente: this.props.telefonoCliente,
+            barberia: this.props.barberia,
+            barbero: this.props.barbero,
+            estado:this.props.estado,
             fecha: this.props.fecha,
-            turno: this.props.turno,
-            estado: this.props.estado
-            
+            hora: this.props.hora,
+            n:this.props.n
         })}
+        getbarer= async() =>{
+            const {data} = await axios.get("http://localhost:5000/barberos/"+this.props.barbero)
+            console.log(data);
+        }
          
     state = {
-        namebarber: "",
-        cliente: "",
-        barbershop: "",
-        id:"",
-        fecha: "",
-        turno: "",
-        estado: "",
-       
+        nombreCliente: "",
+    telefonoCliente: "",
+    barberia: "",
+    barbero: "",
+    estado:false,
+    fecha: "",
+    hora: "",
+     n:""  
     }
 
     citacomplete = ()=>{
@@ -42,27 +49,18 @@ export default class Citas extends Component{
         return(
             
               
-          <div className="container">
-
-                    
-
-              
-            <div className="card text-center pt-4">
-           <h4 className="card-header">Turno {+ this.state.turno}</h4>
+          <div className="container pt-4">
+         <div className="card text-center ">
+           <h4 className="card-header">Cita 0{+ this.state.n}</h4>
             <div className="card-body text-dark">
                 
                
-                   cliente: 
-               
-                <h4>{this.state.cliente}</h4>
-               
-                Barbero: 
-               
-                <h4>{this.state.namebarber}</h4>
-             
-                   Fecha 
-               
-              <h4> {this.state.fecha}</h4>
+                   Cliente:<p> {this.state.nombreCliente}</p>
+                   Telefono: <p>{this.state.telefonoCliente}</p>
+                   Codigo del barbero:<p>{this.state.barbero}</p>
+                   Fecha: <p>{this.state.fecha} </p>
+                   hora: <p>{this.state.hora}</p>
+            
                 <div className="card-footer">
                    {this.citacomplete()}
                 </div>

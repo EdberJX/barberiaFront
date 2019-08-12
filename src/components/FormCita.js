@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from "react-datepicker";
 import axios from 'axios';
 
+
 //import { barberos } from "../db/barber.json";
 
 
@@ -24,12 +25,16 @@ export default class FormCita extends Component{
         }
         getBaberos = async () => {
              const { data } = await axios.get('http://localhost:5000/barberos/'+this.state.barberia)
-            
+            if(data[0]){
              this.setState({
                  barberos:data,
                  barberoSelected: data[0]._id
                 })
+            }else{
+                alert("Por favor Registre Barberos")
+                window.location.href ="http://localhost:3000/barber/"+this.state.barberia;
                 
+            }
 
         }
         

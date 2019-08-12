@@ -13,8 +13,11 @@ export default class SignIn extends Component {
        const res =await axios.post('http://localhost:5000/login',userLogin)
 
        if(res.data){
-        
+          if(res.data[0].barberia===true){
         this.props.history.push("/addservice/"+res.data[0]._id)
+          }else{
+            this.props.history.push("/citasbarberos/"+res.data[0]._id)
+          }
        }else{
            alert('Usuario Incorrecto')
      

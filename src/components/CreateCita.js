@@ -8,47 +8,68 @@ import "react-datepicker/dist/react-datepicker.css";
 export default class CreateCita extends Component {
 
   async componentDidMount() {
-   
-    this.getBarberos();
+   console.log(this.state.barberia)
+  this.getBarberia()
     
     }
  
-
+    getBarberia = async () =>{
+      const { data } = await axios.get('http://localhost:5000/barberiaid/'+this.props.match.params.id);
+     this.setState({
+       barberia:data[0],
+       servicios:data[0].servicios 
+      })
+     console.log(this.state.servicios )
+    }
    
    
-    //BarberShops._id === this.props.match.params)
-   
-    getBarberos = async () =>{
-      
-      const res = await axios.get('http://localhost:5000/barberos/'+this.props.match.params.id)
-       this.setState({
-         barberos: res.data,
-         barberia: this.props.match.params.id
-         })
-         //console.log( this.state.barberia);
-      // console.log(this.state.barberos, this.state.barberia )
-   }
+  
 
   state = {
-    
-  };
-  onInputChange = async e => {
-   
+    barberia:"",
+    servicios:[]
   };
 
-  onChange = date => {
-   
-    
-  };
 
   render() {
     return (
       //<div className="col-md-6 offset-md-3">
-      <div className="container ">
+      <div className="container row mt-4">
         <div className="col-md-4">
               <FormCita barberia={this.props.match.params.id}/>
           </div>
+          <div className="col-md-8">
+            
+        <div className="jumbotron">
+           
+                    <h3 className="display-4 text-center">Bienvenidos a {this.state.barberia.nombre}</h3>
       
+                    
+                      <br></br>
+                          <h5>Servicios:</h5>
+                          <br></br>
+                          <ul className="list-group">
+                        {
+                            this.state.servicios.map( servicio =>(
+                                
+                                <li className="list-group-item list-group-item-action" >
+                                   
+                                    {servicio}
+                                </li>    
+                                )
+                            )
+                          
+                        }
+
+                    </ul> 
+                        
+                        <hr className="my-4"></hr>
+                    <div className="card-footer">
+                        <h4>Llamanos {this.state.barberia.telefono} </h4>
+                    </div>
+                        
+                  </div>  
+            </div>
      </div>
      
     );
