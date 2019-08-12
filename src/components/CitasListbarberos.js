@@ -19,7 +19,8 @@ export default class CitasListbarberos extends Component {
       
        
         this.setState({
-            citas: data
+            citas: data,
+            
         })
             
         
@@ -41,8 +42,7 @@ onClick = (id) =>{
 
     state = {
        
-        citas:[],
-        estado: false
+        citas:[]
     }
 
     render(){
@@ -64,10 +64,11 @@ onClick = (id) =>{
                             telefonoCliente={cita.telefonoCliente}
                             barberia={cita.barberia}
                             barbero={cita.barbero}
-                            estado={true}
+                            estado={cita.estado}
                             fecha={cita.fecha}
                             hora={cita.hora}
                             n={i++}
+                            _id={cita._id}
                             />
                             </div>
                             ))}

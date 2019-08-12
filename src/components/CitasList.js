@@ -88,6 +88,9 @@ export default class CitasList extends Component {
             fecha: "",
             hora: ""
     }
+    estadocita = (cita)=>{
+        console.log(cita)
+    }
 
     render(){
         let i =1;
@@ -117,6 +120,7 @@ export default class CitasList extends Component {
                             <div className="col-md-4" key={cita._id}>
                                 
                             <Citas 
+                            
                             nombreCliente={cita.nombreCliente}
                             telefonoCliente={cita.telefonoCliente}
                             barberia={cita.barberia}
@@ -125,6 +129,7 @@ export default class CitasList extends Component {
                             fecha={cita.fecha}
                             hora={cita.hora}
                             n={i++}
+                            _id={cita._id}
                             />
                             </div>
                             ))}

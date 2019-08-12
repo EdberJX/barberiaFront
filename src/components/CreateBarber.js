@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Estadistica from './estadistica';
 //import { barberos } from '../db/barber.json';
 export default class CreateUser extends Component {
   
@@ -149,7 +150,7 @@ export default class CreateUser extends Component {
                     </ul>
                     </div>
             </div>
-            
+            <Estadistica idbarberia={this.props.match.params.id}/>
             </div>
         )
     }
